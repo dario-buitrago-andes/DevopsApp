@@ -23,10 +23,10 @@ from src.errors.errors import ApiError
 
 from src.database import init_db
 
-app = Flask(__name__)
-app.register_blueprint(blacklist_blueprint)
+application = Flask(__name__)
+application.register_blueprint(blacklist_blueprint)
 
-@app.errorhandler(ApiError)
+@application.errorhandler(ApiError)
 def handle_exception(err):
     response = {
       "mssg": err.description,
