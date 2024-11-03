@@ -3,4 +3,12 @@
 .env.*
 .idea
 .DS_Store
+/src/__pycache__
+/src/blueprints/__pycache__
+/src/commands/__pycache__
+/src/errors/__pycache__
+/src/models/__pycache__
+/tests/__pycache__
+/tests/blueprints/__pycache__
+
 api_docker.db
