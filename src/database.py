@@ -16,14 +16,21 @@ DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 
-DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+if os.getenv('FLASK_ENV') == 'production':
+    DATABASE_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+    engine = create_engine(DATABASE_URL)
+    session_factory = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    db_session = scoped_session(session_factory)
+else:
+    DATABASE_URL = "sqlite:///api_docker.db"
+    engine = create_engine(DATABASE_URL, echo=True, future=True)
+    session_factory = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    db_session = scoped_session(session_factory)
 
 print("DATABASE_URL", DATABASE_URL)
 
-engine = create_engine(DATABASE_URL)
-session_factory = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-db_session = scoped_session(session_factory)
+
 
 def init_db():
-    from .models.model import Blacklist, Base # Adjusted import statement
+    from .models.model import Blacklist, Base
     Base.metadata.create_all(bind=engine)

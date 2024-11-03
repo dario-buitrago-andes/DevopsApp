@@ -34,5 +34,6 @@ def handle_exception(err):
     }
     return jsonify(response), err.code
 
+
 init_db()
 
