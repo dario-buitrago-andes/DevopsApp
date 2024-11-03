@@ -8,7 +8,7 @@ phases:
 
   pre_build:
     commands:
-      - Setting up environment variables and other setup ...
+      - echo Setting up environment variables and other setup ...
       - export FLASK_ENV=test
 
   build:
