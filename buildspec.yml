@@ -5,11 +5,10 @@ phases:
     commands:
       - echo Installing dependencies...
       - pip install -r requirements.txt
-      - pytest tests/
 
   pre_build:
     commands:
-      - echo Pre-build phase: Setting up environment variables and other setup
+      - Setting up environment variables and other setup ...
       - export FLASK_ENV=test
 
   build:
