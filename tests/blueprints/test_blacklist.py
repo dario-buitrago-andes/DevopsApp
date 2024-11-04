@@ -101,7 +101,10 @@ def test_get_blocked_info_not_in_blacklist(client, mocker):
     mock_get_blocked_info = mocker.patch('src.commands.get_blocked_info.IsBlockedEmail.execute')
     mock_get_blocked_info.return_value = {"blacklisted_email": False}
 
-    response = client.get('/blacklist/not_in_list@example.com')
+    headers = {
+        'Authorization': 'Bearer valid_token'
+    }
+    response = client.get('/blacklist/not_in_list@example.com', headers=headers)
 
     assert response.status_code == 200
     assert response.get_json() == {"blacklisted_email": False}
