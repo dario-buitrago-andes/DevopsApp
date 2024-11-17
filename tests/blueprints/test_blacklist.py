@@ -12,7 +12,7 @@ def client():
     return app.test_client()
 
 def test_ping(client):
-    response = client.get('/ping')
+    response = client.get('/')
     assert response.status_code == 200
     assert response.data == b'pong'
 
