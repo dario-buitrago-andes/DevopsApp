@@ -1,14 +1,23 @@
 version: 0.2
 
 phases:
+  install:
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt
+
   pre_build:
     commands:
+      - echo Setting up environment variables for test ...
+      - export FLASK_ENV=test
       - echo Logging into aws ECR...
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 715841324552.dkr.ecr.us-east-2.amazonaws.com
 
   build:
     commands:
       - echo Build started on `date`
+      - echo Running unit tests...
+      - pytest tests/ --junitxml=reports/test-report.xml
       - echo Building the Docker image...
       - docker build -t devops_app .
       - docker tag devops_app:latest 715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest
