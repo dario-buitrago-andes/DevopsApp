@@ -9,7 +9,7 @@ blacklist_blueprint = Blueprint('blacklist', __name__)
 
 @blacklist_blueprint.route('/', methods=['GET'])
 def ping():
-    return "pong", 200
+    return "pong", 503
 
 @blacklist_blueprint.route('/users/reset', methods=['POST'])
 def reset_database():

@@ -13,7 +13,7 @@ def client():
 
 def test_ping(client):
     response = client.get('/')
-    assert response.status_code == 200
+    assert response.status_code == 503
     assert response.data == b'pong'
 
 def test_reset_database(client, mocker):
