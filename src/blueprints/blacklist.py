@@ -7,7 +7,7 @@ from src.errors.errors import InvalidParams, UserAlreadyExists
 
 blacklist_blueprint = Blueprint('blacklist', __name__)
 
-@blacklist_blueprint.route('/ping', methods=['GET'])
+@blacklist_blueprint.route('/', methods=['GET'])
 def ping():
     return "pong", 200
 
