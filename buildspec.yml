@@ -1,25 +1,29 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - echo Installing dependencies...
-      - pip install -r requirements.txt
-
   pre_build:
     commands:
-      - echo Setting up environment variables and other setup ...
-      - export FLASK_ENV=test
+      - echo Logging into aws ECR...
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 715841324552.dkr.ecr.us-east-2.amazonaws.com
 
   build:
     commands:
-      - echo Running tests...
-      - pytest tests/ --junitxml=reports/test-report.xml
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t devops_app .
+      - docker tag devops_app:latest 715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest
 
   post_build:
     commands:
-      - echo Build complete
-      - echo Tests finished
+      - echo Build completed on `date`
+      - echo Pushing the docker image
+      - docker push 715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest
+      - echo Writing Image Definitions file...
+      - printf '[{"name":"Container-app-devops","imageUri":"715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest"}]' > imagedefinitions.json
+      - printf '{"ImageURI":"715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest"}' >imageDetail .json
+      - cat imagedefinitions.json
 artifacts:
   files:
     - '**/*'
+    - imagedefinitions.json
+    - imageDetail .json
