@@ -9,6 +9,17 @@ COPY Pipfile /src/
 # Copiar el código fuente al directorio de trabajo
 COPY src/ /src/
 
+ENV VERSION=1.0
+ENV FLASK_APP=main.py
+ENV FLASK_DEBUG=1
+ENV FLASK_ENV=production
+ENV DB_USER="postgres"
+ENV DB_PASSWORD="Devops123!"
+ENV DB_HOST="devops-database.c1wq6u8y4zko.us-east-2.rds.amazonaws.com"
+ENV DB_PORT=5432
+ENV DB_NAME="blacklist"
+ENV SECRET_TOKEN=token-super-secreto
+
 # Instalar las dependencias
 RUN pip install --upgrade pip
 RUN pip install pipenv
@@ -17,10 +28,10 @@ RUN pip install pipenv
 RUN pipenv install
 
 # Exponer el puerto
-EXPOSE 2000
+EXPOSE 5000
 
 # Espera 10 segundos
 
 
 # Define el comando por defecto para ejecutar el microservicio, con espera de 10 segundos
-CMD ["sh", "-c", "sleep 10 && pipenv run flask --app main.py run -h 0.0.0.0 -p 2000"]
+CMD ["sh", "-c", "sleep 10 && pipenv run flask --app main.py run -h 0.0.0.0 -p 5000"]
