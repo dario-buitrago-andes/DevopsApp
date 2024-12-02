@@ -8,7 +8,7 @@ import newrelic.agent
 
 blacklist_blueprint = Blueprint('blacklist', __name__)
 
-@blacklist_blueprint.route('/ping', methods=['GET'])
+@blacklist_blueprint.route('/', methods=['GET'])
 def ping():
     newrelic.agent.record_custom_event('PingEndpoint', {
         'status': 'success'
