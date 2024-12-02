@@ -32,9 +32,6 @@ RUN pipenv install
 # Exponer el puerto
 EXPOSE 5000
 
-# Espera 10 segundos
-
-
 # Define el comando por defecto para ejecutar el microservicio, con espera de 10 segundos
 CMD ["sh", "-c", "sleep 10 && pipenv run flask --app main.py run -h 0.0.0.0 -p 5000"]
 
