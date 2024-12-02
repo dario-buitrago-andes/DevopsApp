@@ -12,3 +12,4 @@
 /tests/blueprints/__pycache__
 
 api_docker.db
+/node_modules
