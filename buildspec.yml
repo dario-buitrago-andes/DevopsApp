@@ -29,10 +29,10 @@ phases:
       - docker push 715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest
       - echo Writing Image Definitions file...
       - printf '[{"name":"Container-app-devops","imageUri":"715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest"}]' > imagedefinitions.json
-      - printf '{"ImageURI":"715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest"}' >imageDetail .json
+      - printf '{"ImageURI":"715841324552.dkr.ecr.us-east-2.amazonaws.com/devops_app:latest"}' >imageDetail.json
       - cat imagedefinitions.json
 artifacts:
   files:
     - '**/*'
     - imagedefinitions.json
-    - imageDetail .json
+    - imageDetail.json

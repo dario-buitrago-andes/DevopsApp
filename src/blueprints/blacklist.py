@@ -13,7 +13,7 @@ def ping():
     newrelic.agent.record_custom_event('PingEndpoint', {
         'status': 'success'
     })
-    return "pong", 503
+    return "pong", 200
 
 @blacklist_blueprint.route('/users/reset', methods=['POST'])
 def reset_database():
